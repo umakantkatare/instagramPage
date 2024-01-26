@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-no-target-blank */
 import { useState } from "react";
-import "./App.css";
 import LoginPage from "./user/LoginPage";
+import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
