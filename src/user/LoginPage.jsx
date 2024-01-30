@@ -1,35 +1,17 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unreachable */
 /* eslint-disable no-unused-vars */
+
 import React, { useState } from "react";
 import logo from "../assets/instagram.png";
 
 function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(true);
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
 
-  const handleToogleMode = () => {
+  const login = () => {
     setIsSignUp(!isSignUp);
   };
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    if (name === "username") setUsername(value);
-    else if (name === "password") setPassword(value);
-    else if (name === "email") setEmail(value);
-  };
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    if (isSignUp) {
-      console.log("signUp :", { username, password, email });
-    } else {
-      console.log("Login :", { username, password });
-    }
-  };
   return (
-    <div className=" min-h-screen bg-gray-200 flex items-center justify-center flex-col gap-3 ">
+    <div className=" min-h-screen bg-gray-200 flex items-center justify-center flex-col gap-3 dark:bg-slate-500 ">
       <div className="bg-white  p-4 rounded-md  w-96">
         <h1 className=" text-2xl font-bold text-center mb-4 ">
           <img
@@ -39,77 +21,100 @@ function LoginPage() {
           />
         </h1>
         <form action="">
-          <div className=" mb-4">
-            <label
-              htmlFor=""
-              className=" block text-sm font-semibold text-gray-500"
-            >
-              username:
-            </label>
+          <div className="mb-4 ">
             <input
-              value={username}
+              placeholder="Email"
+              type="email"
+              hidden={isSignUp}
+              name="email"
+              className="mt-1 p-2 w-full border bg-slate-100 rounded-md"
+            />
+          </div>
+
+          <div className="mb-4 ">
+            <input
+              placeholder="Full Name"
+              hidden={isSignUp}
+              type="text"
+              name="Full Name"
+              className="mt-1 p-2 w-full border bg-slate-100 rounded-md"
+            />
+          </div>
+
+          <div className=" mb-4">
+            <input
               placeholder="username"
               name=" username"
-              onChange={handleInput}
-              className=" mt-1 p-2 w-full border rounded-md text-sm font-bold text-black"
+              className=" mt-1 p-2 w-full border rounded-md text-sm bg-slate-100  text-black"
               type="text"
             />
           </div>
           <div className="mb-4">
-            <label
-              className=" block text-sm font-semibold text-gray-500"
-              htmlFor=""
-            >
-              password:
-            </label>
             <input
-              onChange={handleInput}
-              value={password}
               placeholder="password"
-              className=" mt-2 p-2 w-full border rounded-md text-sm font-bold text-gray-700"
-              type="text"
+              className=" mt-2 p-2 w-full border rounded-md text-sm bg-slate-100  text-gray-700"
+              type="password"
               name="password"
             />
           </div>
-          {isSignUp && (
-            <div className="mb-4 ">
-              <label
-                className="block text-sm font-bold text-gray-500"
-                htmlFor=""
-              >
-                email
-              </label>
-              <input
-                onChange={handleInput}
-                value={email}
-                type="email"
-                name="email"
-                className="mt-1 p-2 w-full border rounded-md"
-              />
-            </div>
-          )}
-          <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              className=" bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-            >
-              {/* {isSignUp ? "Sign Up" : "Login"} */} signUp
+          <div className="text-center">
+            <button className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              {isSignUp ? "log in" : "sign up"}
             </button>
-            <p className=" text-sm text-gray-500 ">
-              {isSignUp ? "Have an account" : "Don't have an account"}
-              <button
-                onClick={handleToogleMode}
-                type="button"
-                className="text-blue-600 hover:underline focus:outline-none"
-              >
-                {!isSignUp ? "Sign Up" : "Login"}
-              </button>
-            </p>
           </div>
         </form>
+      </div>
+      <div className="bg-white  p-4 rounded-md  w-96 text-center text-xl">
+        {isSignUp ? "don't have an account? " : "have an account? "}
+        <span
+          className=" border-spacing-1  cursor-pointer rounded-md text-blue-600 p-1 pb-2"
+          onClick={login}
+        >
+          {!isSignUp ? "log in" : "sign up"}
+        </span>
       </div>
     </div>
   );
 }
 
 export default LoginPage;
+
+// import { useState } from "react";
+// import Logo from "../assets/instagram.png";
+
+// function LoginPage() {
+//   const [login, setLogin] = useState(true);
+//   const logInSwitch = () => {
+//     setLogin(!login);
+//   };
+//   return (
+//     <div>
+//       <div className=" mb-4">
+//         <input
+//           // value={username}
+//           placeholder="username"
+//           name=" username"
+//           onChange={handleInput}
+//           className=" mt-1 p-2 w-full border rounded-md text-sm  text-black"
+//           type="text"
+//         />
+//       </div>
+//       <div className=" mb-4">
+//         <input
+//           // value={username}
+//           placeholder="username"
+//           name=" username"
+//           onChange={handleInput}
+//           className=" mt-1 p-2 w-full border rounded-md text-sm  text-black"
+//           type="password"
+//         />
+//       </div>
+//       <button>{login ? "Sign in" : "Sign up"}</button>
+//       <div>
+//         {login ? "Don't have account?" : "have an account?"}{" "}
+//         <span onClick={loginSwitch}>{login ? "Sign up" : "Log in"}</span>
+//       </div>
+//     </div>
+//   );
+// }
+// export default LoginPage;
